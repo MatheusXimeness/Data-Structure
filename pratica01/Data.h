@@ -2,6 +2,10 @@
 #define DATA_H
 
 class Data {
+
+    friend ostream & operator<<(ostream &, const Data &);
+	friend istream & operator>>(istream &, Data &);
+
     public:
 
         Data(int d = 1, int m = 1, int a = 2018);
@@ -19,6 +23,7 @@ class Data {
         int difDias(const Data&);
 
         void imprime();
+        void le();
 
     private:
 
