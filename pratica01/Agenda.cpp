@@ -22,7 +22,7 @@ ItemAgenda::ItemAgenda(const sting & desc, const Data & dt, const Horario & hr){
 }
 
 void ItemAgenda::setDesc(const string & desc){
-    strcpy(descrcao,desc);
+    strcpy(descricao,desc);
 }
 
 void ItemAgenda::setData(const Data & dt){
