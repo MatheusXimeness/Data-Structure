@@ -1,10 +1,12 @@
 #ifndef DATA_H
 #define DATA_H
+#include<iostream>
+using namespace std;
 
 class Data {
 
-    friend ostream & operator<<(ostream &, const Data &);
-	friend istream & operator>>(istream &, Data &);
+    friend ostream & operator<<(std::ostream &, const Data &);
+	friend istream & operator>>(std::istream &, Data &);
 
     public:
 
@@ -15,15 +17,14 @@ class Data {
         void setMes(int m);
         void setAno(int a);
 
-        int getDia();
-        int getMes();
-        int getAno();
+        int getDia() const;
+        int getMes() const;
+        int getAno() const;
 
         int compData(const Data&);
         int difDias(const Data&);
 
         void imprime();
-        void le();
 
     private:
 
@@ -31,3 +32,5 @@ class Data {
         int mes;
         int ano;
 };
+
+#endif

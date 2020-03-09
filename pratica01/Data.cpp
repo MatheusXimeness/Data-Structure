@@ -1,13 +1,16 @@
-#include<iostream>
+#include <iomanip>
+#include <iostream>
+#include <ostream>
+#include <istream>
 using namespace std;
 
-include "Data.h"
+#include "Data.h"
 
 
 Data::Data(int d, int m, int a){
-    setDia(int d);
-    setMes(int m);
-    setAno(int a);
+    setDia(d);
+    setMes(m);
+    setAno(a);
 }
 
 Data::Data(const Data& d){
@@ -49,7 +52,7 @@ int Data::difDias(const Data& d){
     int diasNoMes = 30;
     int difDias;
 
-    return difDias = ((diasNoAno*ano)+(diasNoMes*mes)+dia) - ((diasNoAno*d.ano)+(diasNoMes*d.mes)+d.dia)
+    return difDias = ((diasNoAno*ano)+(diasNoMes*mes)+dia) - ((diasNoAno*d.ano)+(diasNoMes*d.mes)+d.dia);
     
 }
 
@@ -68,7 +71,7 @@ void Data::setMes(int m){
         if(m<1)
             m = 1;
         if(m>12)
-            m = 30;
+            m = 12;
     }
 
     mes = m;
@@ -98,27 +101,30 @@ int Data::getAno() const {
 }
 
 void Data::imprime() {
-    	cout << getDia() << "/" << getMes() << "/" << getAno() << endl;
+    	cout << this << endl;
 }
 
-ostream & operator<<(ostream &cout, const Data &dt){
-	dt.imprime();
-	
-	return cout;
+ostream & operator<<(ostream &out, const Data &dt){
+    out << dt.getDia() << " "
+ << dt.getMes() << " "
+ << dt.getAno();
+    
+    return out;
 }
 
-istream & operator>>(istream &cin, Data &dt){
-	dt.le();
-	
-	return cin;
-}
+istream & operator>>(istream &in, Data &dt){
+    int d, m, a;
 
-void Data::le(){
-	int d,m,a;
-	cout << "dia: ";
-	cin >> d; setDia(d);
-	cout << "mes: ";
-	cin >> m; setMes(m);
-	cout << "ano: ";
-	cin >> a; setAno(a);
+    if(!in)
+        return in;
+
+    in >> d;
+    in >> m;
+    in >> a;
+
+    dt.setDia(d);
+    dt.setMes(m);
+    dt.setAno(a);
+
+    return in;
 }

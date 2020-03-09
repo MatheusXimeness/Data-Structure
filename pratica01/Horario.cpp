@@ -1,13 +1,18 @@
-#include<iostream>
+#include <istream>
+#include <iostream>
+#include <ostream>
+#include <istream>
+#include <iomanip>
+#include <cstdlib>
 using namespace std;
 
-include "Horario.h"
+#include "Horario.h"
 
 
 Horario::Horario(int h, int m, int s){
-    setHora(int h);
-    setMinuto(int m);
-    setSegundo(int s);
+    setHora(h);
+    setMinuto(m);
+    setSegundo(s);
 }
 
 Horario::Horario(const Horario& h){
@@ -26,12 +31,12 @@ int Horario::compHorario(const Horario& h){
             return 1;
     }
     else if (hora == h.hora){
-        if(minuito < h.minuto)
+        if(minuto < h.minuto)
             return -1;
         else if(minuto > h.minuto)
             return 1;
         else if (segundo < h.segundo)
-            return -1
+            return -1;
         else if (segundo > h.segundo)
             return 1;
     }
@@ -42,19 +47,30 @@ int Horario::difSegundos(const Horario& h){
     int segundosNoMinuto = 60;
     int difSegundos;
 
-    return difSegundos = ((hora*segundosNaHora)+(minutos*segundosNoMinutos)+segundo) - ((h.hora*segundosNaHora)+(h.minutos*segundosNoMinutos)+h.segundo)
+    return difSegundos = ((hora*segundosNaHora)+(minuto*segundosNoMinuto)+segundo) - ((h.hora*segundosNaHora)+(h.minuto*segundosNoMinuto)+h.segundo);
 }
 
 void Horario::setHora(int h){
-    hora = h;
+     if (h < 0 || h > 23) {
+    (h < 0) ? h = 0 : h = 23;
+  }
+  hora = h;
 }
 
 void Horario::setMinuto(int m){
-    minuto = m;
+  if (m < 0 || m > 59) {
+    (m < 0) ? m = 0 : m = 59;
+  }
+
+  minuto = m;
 }
 
 void Horario::setSegundo(int s){
-    segundo = s;
+  if (s < 0 || s > 59) {
+    (s < 0) ? s = 0 : s = 59;
+  }
+
+  segundo = s;
 }
 
 int Horario::getHora() const{
@@ -70,5 +86,37 @@ int Horario::getSegundo() const{
 }
 
 void Horario::imprime(){
-    cout << hora << ":" << minuto << ":" << segundo << endl;
+    cout << this << endl;
+}
+
+istream& operator>>(istream &in, Horario &hms)
+{
+  int h, m, s;
+
+  if(!in)
+    return in;
+
+  cin >> h;
+  cin >> m;
+  cin >> s;
+
+  if(!in)
+    in.clear();
+  else
+  {
+    hms.setHora(h);
+    hms.setMinuto(m);
+    hms.setSegundo(s);
+  }
+
+  return in;
+}
+
+ostream& operator<<(ostream &out, Horario hms)
+{
+    out  << hms.hora << " "
+    << hms.minuto << " "
+    << hms.segundo;
+    
+    return out;
 }

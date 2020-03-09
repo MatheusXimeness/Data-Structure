@@ -2,9 +2,22 @@
 #define AGENDA_H
 
 
+#include <iostream>
+#include <string>
+#include <vector>
+
+using namespace std;
+
+#include "Data.h"
+#include "Horario.h"
+
 class ItemAgenda {
+
+    friend istream& operator>>(std::istream &in, ItemAgenda &it);
+    friend ostream& operator<<(std::ostream &out, ItemAgenda it);
+
     public:
-        ItemAgenda();
+        ItemAgenda(){};
         ItemAgenda(const string &, const Data &, const Horario &);
         ItemAgenda(const ItemAgenda &);
         void setDesc(const string &);
@@ -21,8 +34,18 @@ class ItemAgenda {
 };
 
 class Agenda {
+
+    friend ostream& operator<<(std::ostream &out, Agenda sch);
+
     public:
         Agenda();
-        insereItem(const ItemAgenda &);
-        compromissosData(const Data &);
+        void inserirItem(const ItemAgenda &);
+        void compromissosData(Data) const;
+    private:
+        int tamAg;
+        ItemAgenda *ag;
+
+        void imprimeAg();
 };
+
+#endif
