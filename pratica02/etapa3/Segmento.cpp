@@ -38,4 +38,3 @@ float Segmento::area() const {
 float Segmento::perimetro() const {
     return (x2 + y2 + FigBase::getX() + FigBase::getY());
 }
- teste
