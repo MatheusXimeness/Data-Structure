@@ -2,7 +2,7 @@
 #include "Data.h"
 using namespace std;
 
-Data::Data(d, m, a){
+Data::Data(int d, int m, int a){
     setDia(d);
     setMes(m);
     setAno(a);
@@ -38,7 +38,7 @@ void Data::setMes(int m){
 }
 
 void Data::setAno(int a){
-    if(d>=2018 && d<= 2020)
+    if(a>=2018 && a<= 2020)
         ano = a;
     else{
         if(a<2018)
