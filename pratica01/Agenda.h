@@ -40,7 +40,7 @@ class Agenda {
     public:
         Agenda();
         void inserirItem(const ItemAgenda &);
-        void compromissosData(Data) const;
+        void compromissosData(const Data&) const;
     private:
         int tamAg;
         ItemAgenda *ag;

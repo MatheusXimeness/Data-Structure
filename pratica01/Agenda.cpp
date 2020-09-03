@@ -92,7 +92,7 @@ void Agenda::inserirItem(const ItemAgenda& it){
     }
 }
 
-void Agenda::compromissosData( Data d) const {
+void Agenda::compromissosData( const Data& d) const {
 
   for(int i = 0; i < tamAg; ++i)
   {
