@@ -44,8 +44,10 @@ void Circulo::le(){
 
 ostream& operator<<(ostream& cout, const Circulo& cir){
     cir.imprime();
+    return cout;
 }
 
 istream& operator>>(istream& cin, Circulo& cir){
     cir.le();
+    return cin;
 }

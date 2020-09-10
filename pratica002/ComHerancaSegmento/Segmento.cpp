@@ -52,8 +52,10 @@ void Segmento::le(){
 
 istream & operator>>(istream& cout, Segmento& seg){
     seg.le();
+    return cout;
 }
 
 ostream & operator<<(ostream& cin, const Segmento& seg){
     seg.imprime();
+    return cin;
 }

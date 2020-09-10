@@ -56,9 +56,11 @@ void Retangulo::le(){
 
 ostream & operator<<(ostream& cout, const Retangulo& re){
     re.imprime();
+    return cout;
 }
 
 istream & operator>>(istream& cin, Retangulo& re){
     re.le();
+    return cin;
 }
 
