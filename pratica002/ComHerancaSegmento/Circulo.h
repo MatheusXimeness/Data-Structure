@@ -11,7 +11,7 @@ using namespace std;
 class Circulo : public FigBase {
     public:
         Circulo(double, double, double, int, int, int);
-        // DUVIDA Circulo(double x = 0.0, double y = 0.0, double raio = 0.0, int = 1, int = 1, int =1);
+        Circulo();
         double getRaio() const;
 
         void setRaio(double);

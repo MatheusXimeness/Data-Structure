@@ -8,6 +8,10 @@ Circulo::Circulo(double x, double y, double r, int esp, int cor, int tipo):
     setRaio(r);
 }
 
+Circulo::Circulo(): FigBase(1,1,1,1,1){
+    setRaio(1);
+}
+
 double Circulo::getRaio() const {
     return raio;
 }

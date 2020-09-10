@@ -13,7 +13,7 @@ class Retangulo : public FigBase {
 
     public:
         Retangulo(double, double, double, double, int, int, int);
-        // DUVIDA Retangulo(double = 0.0, double = 0.0, double = 0.0, double = 0.0, int = 1, int = 1, int =1);
+        Retangulo();
         double getLargura() const;
         double getAltura() const;
 

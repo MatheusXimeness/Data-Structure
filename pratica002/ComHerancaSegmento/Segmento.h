@@ -13,7 +13,7 @@ class Segmento : public FigBase {
 
     public:
         Segmento(double, double, double, double, int, int, int);
-        // DUVIDA Segmento(double = 0.0, double = 0.0, double = 0.0, double = 0.0, int = 1, int = 1, int =1);
+        Segmento();
         double getX2() const;
         double getY2() const;
 

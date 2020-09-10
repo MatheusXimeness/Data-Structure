@@ -10,6 +10,11 @@ Segmento::Segmento(double x, double y, double x2, double y2, int esp, int cor, i
     setY2(y2);
 }
 
+Segmento::Segmento() : FigBase(1,1,1,1,1){
+    setX2(1);
+    setY2(1);
+}
+
 
 void Segmento::setX2(double x2) {
     this->x2 = x2;

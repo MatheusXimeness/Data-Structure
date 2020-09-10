@@ -10,6 +10,11 @@ Retangulo::Retangulo(double x, double y, double alt, double larg, int esp,
     setLargura(larg);                         
 }
 
+Retangulo::Retangulo(): FigBase(1,1,1,1,1){
+    setAltura(1);
+    setLargura(1);
+}
+
 double Retangulo::getAltura() const {
     return altura;
 }
