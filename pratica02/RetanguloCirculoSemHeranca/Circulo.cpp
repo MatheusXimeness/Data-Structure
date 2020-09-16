@@ -69,7 +69,7 @@ float Circulo::area() const {
 }      
           
 float Circulo::perimetro() const {
-    return 2 * PI * raio;      
+    return 2 * PI * raio;       
 }
 
 
