@@ -30,18 +30,15 @@ int main(){
         cout << *p[i] << endl;
     }
 
-    Circulo *circuloPtr[2];
+    Circulo *circuloPtr;;
 
-    for(int i=0;i<2;i++){
-            circuloPtr[i] = dynamic_cast <  Circulo * > ( p[ i ] );
-            if( circuloPtr[i] != 0 ){
-                double oldraio = circuloPtr[i]->getRaio();
-                circuloPtr[i]->setRaio(oldraio*2);
+    for(int i=0;i<5;i++){
+            circuloPtr = dynamic_cast <  Circulo * > ( p[ i ] );
+            if( circuloPtr != 0 ){
+                double oldraio = circuloPtr->getRaio();
+                circuloPtr->setRaio(oldraio*2);
+                cout << *circuloPtr << endl;
         }
-    }
-
-    for(int i=0; i<2;i++){
-        cout << *circuloPtr[i] << endl;
     }
 
     return 0;
