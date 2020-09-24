@@ -1,6 +1,6 @@
 /*----------------- File: TestConjunto1.cpp  --------------+
 | Programa para testar a primeira versao da implementacao  |
-| da classe genérica Conjunto - sem lancamento de excecao  |
+| da classe genï¿½rica Conjunto - sem lancamento de excecao  |
 | Implementado por Marcus V. A. Andrade em 04/06/2013      |
 | Atualizado por Marcus V. A. Andrade em 28/03/2017        |
 +----------------------------------------------------------+ */
@@ -35,8 +35,8 @@ int main() {
    if (!d.insere(0.9999))
         cout << "Erro na insercao de " << 0.9999 << endl;
 
-   Conjunto<double> c = d;  // testa operador de atribuicao
-
+  // Conjunto<double> c = d;  // testa operador de atribuicao
+   
    double r;
    bool ok;
    cout << "--- Inserindo elementos --- \n";
@@ -89,7 +89,7 @@ int main() {
               Resultado esperado
 
 OBS: Para obter o resultado esperado listado abaixo
-É NECESSÁRIO digitar os mesmos valores em cada item
+ï¿½ NECESSï¿½RIO digitar os mesmos valores em cada item
 solicitado. Apos digitar a letra u (no final dos testes)
 pressione Ctrl+D (isso representa o final da entrada)
 --------------------------------------------------------
