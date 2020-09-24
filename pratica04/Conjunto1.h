@@ -35,6 +35,7 @@ class Conjunto{
         void le( Conjunto<T>);
         void imprime() const;
 
+
     private:
         T *c;
         int num_elementos;
@@ -142,7 +143,6 @@ ostream & operator<<(ostream &os , const Conjunto<T> &v){
 
     return os;
 }
-
 
 template<class T>
 void Conjunto<T>::le(Conjunto<T> v) {
