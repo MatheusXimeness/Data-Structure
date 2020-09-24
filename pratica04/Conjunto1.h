@@ -22,21 +22,40 @@ class Conjunto{
     friend istream & operator>> <T>(istream &, Conjunto<T>&);
 
     public:
+        Conjunto(const Conjunto<T> &);
         Conjunto(int N);
         Conjunto();
         ~Conjunto();
-        T &operator[](int i) { return c[i];  }
-        bool pertence(const T &x) const;
-        bool insere(const T &x); //return false quando full || repeat
+        // T &operator[](int i) { return c[i]; } talvez
+        bool pertence(const T &) const;
+        bool insere(const T &); //return false quando full || repeat
         int numelementos() const{ return num_elementos; };
-        bool operator==(const Conjunto<T>&x) const;
-        Conjunto<T> &operator=(const Conjunto<T>&x);
+        bool operator==(const Conjunto<T>&) const;
+        Conjunto<T> &operator=(const Conjunto<T>&);
+        void le();
+        void imprime() const;
 
     private:
         T *c;
         int num_elementos;
         int tamArray;
 };
+
+
+template<class T>
+Conjunto<T>::Conjunto(const Conjunto<T> &other){
+    // testando auto atribuição
+    if(this == &other){
+        return *this;
+    } else {
+    // fazendo atribuição
+        delete []c;
+        c = new T(other.tamArray);
+        num_elementos = other.num_elementos;
+        for(int i=0; i<tamArray; i++) c[i] = other.c[i];    
+        return *this;
+    }
+}
 
 
 template<class T>
@@ -68,9 +87,9 @@ Conjunto<T>::~Conjunto(){
 
 
 template<class T>
-bool Conjunto<T>::pertence(const T &x) const {
+bool Conjunto<T>::pertence(const T &elem) const {
     for(int i=0;i<tamArray;i++){
-        if(c[i] == x){
+        if(c[i] == elem){
             cout << "Item pertencente" << endl;
             return true;
         }
@@ -81,15 +100,12 @@ bool Conjunto<T>::pertence(const T &x) const {
 
 
 template<class T>
-bool Conjunto<T>::insere(const T &x){
-    if(num_elementos == tamArray ){
+bool Conjunto<T>::insere(const T &elem){
+    if(num_elementos == tamArray || pertence(elem) ){
         cout << "não foi possível inserir, vetor cheio" << endl;
         return false;
     }
-    if(pertence(x))
-        return false;
-    
-    c[num_elementos] = x;
+    c[num_elementos] = elem;
     num_elementos++;
     cout << "Inserido com sucesso" << endl;
     return true;
@@ -97,43 +113,64 @@ bool Conjunto<T>::insere(const T &x){
 
 
 template<class T>
-bool Conjunto<T>::operator==(const Conjunto<T>&x) const{
-    for(int i=0;i<tamArray;i++){
-        if(c[i] != x[i]){
-            cout << "vetores diferentes" << endl;
+bool Conjunto<T>::operator==(const Conjunto<T>&other) const{
+    if(tamArray != other.tamArray)
+        return false;
+    for(int i=0;i<tamArray;i++)
+        if(!pertence(other.c[i]))
             return false;
-        }
-    }
-     cout << "vetores iguais" << endl;
-     return true;
+    return true;
 }
 
 
 template<class T>
-Conjunto<T> &Conjunto<T>::operator=(const Conjunto<T>&x){
-    for(int i=0;i<tamArray;i++){
-        c[i] = x[i];
+Conjunto<T> &Conjunto<T>::operator=(const Conjunto<T>&other){
+    // testando auto atribuição
+    if(this == &other){
+        return *this;
+    } else {
+    // fazendo atribuição
+        delete []c;
+        c = new T(other.tamArray);
+        num_elementos = other.num_elementos;
+        for(int i=0; i<tamArray; i++) c[i] = other.c[i];    
+        return *this;
     }
-    return *this;
+}
+
+
+template<class T>
+void Conjunto<T>::imprime() const {
+    cout << "Número de elementos: " << num_elementos << endl;
+    cout << "Tamanho do array: " << tamArray << endl;
+    for(int i=0; i<tamArray; i++) cout << c[i] << " ";
+    cout << endl;
 }
 
 template<class T>
 ostream & operator<<(ostream &os , const Conjunto<T> &v){
-    for(int i=0;i<v.tamArray;i++){
-        os << v[i] << " ";
-    }
+    v.imprime();
+
     return os;
 }
 
 template<class T>
-istream & operator>>(istream & in, Conjunto<T> v){
-    int numeroElementos, tamanhoArray;
-    in >> tamanhoArray >> numeroElementos;
-    v = new T(tamanhoArray);
-    for(int i=0;i<numeroElementos;i++){
-        in >> v[i];
+void Conjunto<T>::le() {
+    int numElem =0;
+    int tamanho;
+    cout << "Digite o tamanho do seu vetor" << endl;
+    cin >> tamanho;
+    T *conj = new T[tamanho];
+    for(int i=0;i<tamanho;i++){
+        cin >> conj[i];
+        numElem++; 
     }
+}
 
+
+template<class T>
+istream & operator>>(istream & in, Conjunto<T> v){
+    v.le();
     return in;
 }
 
