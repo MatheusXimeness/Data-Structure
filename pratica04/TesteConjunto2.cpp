@@ -27,9 +27,9 @@ int main()
    cout << endl;
 
    cout << "dc1 + dc2 = " << dc1 + dc2 << endl; //como ele pega salles
-   //cout << "dc1 * dc2 = " << dc1 * dc2 << endl;
-   //cout << "dc1 - dc2 = " << dc1 - dc2 << endl << endl;
-   
+   cout << "dc1 * dc2 = " << dc1 * dc2 << endl;
+   cout << "dc1 - dc2 = " << dc1 - dc2 << endl << endl;
+
    Conjunto<int> ci;
    {
         cout << "\n\nConjunto ci (de inteiros): \n";
