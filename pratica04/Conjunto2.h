@@ -28,7 +28,9 @@ class Conjunto {
         bool insere(const T &);
         bool pertence(const T &) const;
 
-        Conjunto operator+(const Conjunto<T>&) const; 
+        Conjunto operator+(const Conjunto<T>&) const;
+        Conjunto operator*(const Conjunto<T>&) const;
+        Conjunto operator-(const Conjunto<T>&) const;  
         bool operator==(const Conjunto<T>&) const;
         const Conjunto &operator=(const Conjunto<T>&);
 
@@ -125,6 +127,45 @@ Conjunto<T> Conjunto<T>::operator+(const Conjunto<T>&b) const{
     for(int i = 0;i<b.tamArray;i++) temp.insere(b.c[i]);
 
     return temp;
+}
+
+template<class T>
+Conjunto<T> Conjunto<T>::operator*(const Conjunto<T>&b) const{
+    int tam = tamArray + b.tamArray;
+    Conjunto<T> temp(tam);
+    for(int i = 0;i<tamArray;i++)temp.insere(c[i]);
+    for(int i = 0;i<b.tamArray;i++) temp.insere(b.c[i]);
+    Conjunto<T> temp2(tam);
+
+    for(int i=0;i<tam;i++){
+        if(pertence(temp.c[i]) && b.pertence(temp.c[i]))
+            temp2.insere(c[i]);
+    }
+    return temp2;
+}
+
+template<class T>
+Conjunto<T> Conjunto<T>::operator-(const Conjunto<T>&b) const{
+    int tam = tamArray + b.tamArray;
+    Conjunto<T> temp(tam);
+    for(int i = 0;i<tamArray;i++)temp.insere(c[i]);
+    for(int i = 0;i<b.tamArray;i++) temp.insere(b.c[i]);
+    Conjunto<T> temp2(tam);
+
+    for(int i=0;i<tam;i++){
+        if(pertence(temp.c[i]) && b.pertence(temp.c[i]))
+            temp2.insere(c[i]);
+    }
+    Conjunto<T> temp3(tam);
+    for(int i=0;i<tam;i++){
+        if(b.pertence(temp.c[i]) && temp2.pertence(temp.c[i])){
+            continue;
+        } else {
+            temp3.insere(c[i]);
+        }
+            
+    }
+    return temp3;
 }
 
 template<class T>
