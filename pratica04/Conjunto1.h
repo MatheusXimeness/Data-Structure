@@ -32,7 +32,6 @@ class Conjunto{
         int numelementos() const{ return num_elementos; };
         bool operator==(const Conjunto<T>&) const;
         const Conjunto &operator=(const Conjunto<T>&);
-        void le( Conjunto<T>);
         void imprime() const;
 
 
@@ -59,7 +58,6 @@ Conjunto<T>::Conjunto(const Conjunto<T> &other){
 
 template<class T>
 Conjunto<T>::Conjunto(int N){
-    cout << "construindo com args" << endl;
     c = new T[N];
     num_elementos = 0;
     tamArray = N;
@@ -68,7 +66,6 @@ Conjunto<T>::Conjunto(int N){
 
 template<class T>
 Conjunto<T>::Conjunto(){
-    cout << "construindo sem args" << endl;
     num_elementos = 0;
     tamArray = 10;
     c = new T[tamArray];
@@ -83,7 +80,7 @@ Conjunto<T>::~Conjunto(){
 
 template<class T>
 bool Conjunto<T>::pertence(const T &elem) const {
-    for(int i=0;i<tamArray;i++){
+    for(int i=0;i<num_elementos;i++){
         if(c[i] == elem){
             return true;
         }
@@ -105,9 +102,9 @@ bool Conjunto<T>::insere(const T &elem){
 
 template<class T>
 bool Conjunto<T>::operator==(const Conjunto<T>&other) const{
-    if(tamArray != other.tamArray)
+    if(num_elementos != other.num_elementos)
         return false;
-    for(int i=0;i<tamArray;i++)
+    for(int i=0;i<num_elementos;i++)
         if(!pertence(other.c[i]))
             return false;
     return true;
@@ -132,9 +129,15 @@ const Conjunto<T> &Conjunto<T>::operator=(const Conjunto<T>&other){
 
 template<class T>
 void Conjunto<T>::imprime() const {
-    cout << "{";
-    for(int i=0; i<num_elementos-1; i++) cout << c[i] << ", ";
-    cout << c[num_elementos-1]<< "}"<< endl;
+    cout << "{";  
+    for(int i=0; i<num_elementos-1; i++) cout << c[i] << ",";
+    if(num_elementos > 0){
+        cout << c[num_elementos-1]<< "}";
+    }else
+    {
+        cout << "}";
+    }
+    
 }
 
 template<class T>
@@ -144,17 +147,13 @@ ostream & operator<<(ostream &os , const Conjunto<T> &v){
     return os;
 }
 
-template<class T>
-void Conjunto<T>::le(Conjunto<T> v) {
-	  for(int i=0; i<v.tamArray; i++){
-            cin >> v.c[i];
-            insere(v.c[i]);
-      }									
-}
 
 template<class T>
 std::istream & operator>>(std::istream & in, Conjunto<T>& v){
-    v.le(v);
+    T aux;
+    while(in >> aux){
+        v.insere(aux);
+    }
     return in;
 }
 
