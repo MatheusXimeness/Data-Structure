@@ -1,0 +1,60 @@
+1) Complexidade de tempo das seguintes funções:
+
+- Pertence() : O(n)
+
+- Insere() : O(n)
+
+- numElementos() : O(1)
+
+- operator+ : O(n)
+
+- operator* : O(n)
+
+- operator- : O(n)
+
+2) Considerando a função “+”, a ordem de complexidade do algoritmo depende
+da forma com que os elementos estão ordenados nos conjuntos? Justifique.
+
+- Não, pois pela definição o operator+ tem a função de unir os
+elementos do conjunto sem que haja repetição, sendo assim dada
+qualquer ordem de elementos em conjuntos ela não é levada em 
+consideração.
+
+3)
+        ------ Tempo de Execução -------
+   
+            10   : real    0m1.779s     
+            100  : real    0m1.899s     
+            1000 : real    0m2.502s     
+            5000 : real    0m3.084s     
+            10000: real    0m5.209s     
+            20000: real    0m8.626s     
+            40000: real   0m25.075s    
+
+    Podemos concluir que quanto maior a entrada, mais tempo leva
+    para calcular.
+
+4) Com vetores negativos
+        ------ Tempo de Execução -------
+   
+            10   : real    0m1.114s    
+            100  : real    0m2.771s    
+            1000 : real    0m3.740s     
+            5000 : real    0m3.303s    
+            10000: real    0m6.163s    
+            20000: real    0m7.441s     
+            40000: real    0m24.297s
+    Não houve diferença na forma como o tempo cresce.
+
+5) Compilando com -O3
+        ------ Tempo de Execução -------
+   
+            10   : real    0m1.435s   
+            100  : real    0m1.691s    
+            1000 : real    0m4.515s    
+            5000 : real    0m3.305s   
+            10000: real    0m3.580s     
+            20000: real    0m3.323s    
+            40000: real    0m6.257s
+    Podemos concluir que o tempo de execução foi reduzido
+    para cada caso teste.
