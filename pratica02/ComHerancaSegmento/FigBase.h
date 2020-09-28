@@ -1,5 +1,5 @@
 #ifndef FIGBASE_H
-#define FIGBASE_H
+#define FIGBASE_H 
 #include<iostream>
 
 class FigBase {
