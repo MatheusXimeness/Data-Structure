@@ -49,10 +49,12 @@ public:
 	void insert(const T&,int pos);
 	void clear();
 
+	bool insere(const T &);
 	void empty() const {return size() == 0;};
 	int size() const {return dataSize;};
 
-
+	int eraseMatchingElements(const T&);
+	void sortedInsert(const T &);
 private:
 	T* data; //declare o membro de dados data, que devera armazenar os elementos da lista
 	int dataSize; //quantos elementos ha na lista?
@@ -178,5 +180,56 @@ std::ostream& operator<<(std::ostream &out, const MyVec<T2> &v) {
 	out << "\n";
 	return out;
 }
+
+template<class T>
+int MyVec<T>::eraseMatchingElements(const T&elem){
+	if(dataSize==0) return 0;
+	int cont=0;
+	T* oldData = data;
+	int tam = dataSize;
+	destroy();
+	create();
+	for(int i=0;i<tam;i++){
+		if(elem == oldData[i]){
+			cont++;
+		}
+		else {
+			insere(oldData[i]);
+		}
+	}
+	delete[]oldData;
+	return cont;
+}
+
+
+template<class T>
+void MyVec<T>::sortedInsert(const T &elem){
+	bool inserted = false;
+	for(int i=0; i<dataSize; i++){
+		if(elem<data[i]){
+			insert(elem, i);
+			inserted = true;
+			break;
+		}
+	}
+	if(!inserted){
+		insert(elem, dataSize);
+	}
+}
+
+template<class T>
+bool MyVec<T>::insere(const T &elem){
+	if(dataSize == dataCapacity) { //preciso redimensionar?
+		if(dataCapacity ==0) //Exercicio: Por que e' preciso testar isso?
+			resizeCapacity(1);
+		else
+			resizeCapacity(dataCapacity*2);
+	}
+
+    data[dataSize] = elem;
+    dataSize++;
+    return true;
+}
+
 
 #endif
