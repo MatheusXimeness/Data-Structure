@@ -54,7 +54,7 @@ public:
 
 
 private:
-	?????? data; //declare o membro de dados data, que devera armazenar os elementos da lista
+	T* data; //declare o membro de dados data, que devera armazenar os elementos da lista
 	int dataSize; //quantos elementos ha na lista?
 	int dataCapacity; //quantos elementos atualmente cabem na lista? 
 
@@ -65,9 +65,13 @@ private:
 
 template<class T>
 void MyVec<T>::push_back(const T&elem) {
-	//Implemente esta funcao! (nao reutilize a funcao "insere")
+	if(dataSize == dataCapacity)
+		if(dataCapacity == 0) resizeCapacity(1);
+		else 
+			resizeCapacity(2*dataCapacity);
+	data[dataSize] = elem;
+	dataSize++;
 }
-
 template<class T>
 void MyVec<T>::resize(int newSize) {
 	if(newSize >= dataCapacity) { //primeiro temos que realocar o vector...
@@ -112,16 +116,13 @@ void MyVec<T>::clear() {
 
 template<class T>
 void MyVec<T>::resizeCapacity(int newCapacity) {
-	//implemente esta funcao
-	//Ela deve redimensionar o vetor de modo que ele tenha capacidade newCapacity
-	//Se newCapacity for menor do que a capacidade atual voce devera ignorar a chamada a esta funcao (i.e., nunca reduziremos a capacidade do vetor)
-	//Nao se esqueca de liberar (deletar) a memoria que nao for mais necessaria (para evitar vazamentos de memoria)
-	//Exemplo de execucao:
-	//data=[1,2,3,,], dataSize=3, dataCapacity=5 (vetor de capacidade 5, com 3 elementos ocupados)
-	//se chamarmos resizeCapacity(10), os membros de dados deverao ter os seguintes valores:
-	//data=[1,2,3,,,,,,,], dataSize=3, dataCapacity=10
-
-
+	if(newCapacity <= dataCapacity) return;
+	dataCapacity = newCapacity;
+	T *oldData = data;
+	data = new T[dataCapacity]; // redimensionar data!!
+	for(int i=0;i<dataSize;i++)
+		data[i] = oldData[i];
+	delete[]oldData;
 }
 
 template<class T>
@@ -142,19 +143,19 @@ MyVec<T>::MyVec() {
 }
 
 template<class T>
-MyVec<T>::MyVec(int n, const T&init) {
-	//Implemente esta funcao:
-	//Cria um vetor de tamanho e capacidade n, onde todos os n elementos valem "init"
-
+MyVec<T>::MyVec(int n, const T&init ) {
+	dataSize = dataCapacity = n;
+	data = new T[dataCapacity];
+	for(int i=0;i<dataSize;i++)
+		data[i] = init;
 }
 
 
 //Construtor de copia
 template<class T>
 MyVec<T>::MyVec(const MyVec &other) {
-	//Implemente esta funcao
-	//Dica: nao duplique codigo! (esta funcao deve ser escrita utilizando apenas 2 linhas de codigo!)
-
+	create();
+	*this = other;
 }
 
 template<class T>
