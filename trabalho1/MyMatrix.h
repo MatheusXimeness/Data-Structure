@@ -630,7 +630,7 @@ class MyMatrix{
             }
             delete[] oldStart;
             delete[] oldRagged;
-        }
+        } 
     }
 // ----------- ---------- //
 #endif
