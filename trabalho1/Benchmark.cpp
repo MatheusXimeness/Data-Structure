@@ -81,5 +81,5 @@ int main(int argc, char **argv) {
 	realizaExperimentosMatriz(nrows, tams,false);
 	cout << "\nExperimentos com matriz no formato ragged: " << endl;
 	realizaExperimentosMatriz(nrows, tams,true);
-	delete []tams;
+	delete []tams; 
 }

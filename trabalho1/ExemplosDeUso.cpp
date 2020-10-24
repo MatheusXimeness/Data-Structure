@@ -82,7 +82,7 @@ int main() {
 	cout << "IsRagged? " << m.isRagged() << "\n"; //retorna true (1) se a matriz estiver no formato ragged e false (0) caso contrario...
 	cout << "\n";
 
-
+ 
 	m.resizeRow(1,5); //altera o numero de colunas na linha (primeiro argumento) para o valor do segundo argumento. Caso o número de colunas aumente, os novos elementos sao 
 					  //preenchidos com o valor padrao do tipo (Ex: 0 para int, "\0" para char, ""  para string, etc)
 					  //Assim como as outras, essa funcao deve funcionar nos dois modos (na sua implementacao voce nao deve mudar o modo para fazer resize...)
