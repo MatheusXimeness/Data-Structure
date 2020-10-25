@@ -136,6 +136,7 @@ void testaInsert() {
     v.insert(st,it);
     cout << "V apos a insercao de " << st << " na posicao " << posInsert << endl;
     cout << v << endl;
+    cout << "Size: " << v.size() << endl;
   }
 }
 /*
