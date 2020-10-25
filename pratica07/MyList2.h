@@ -85,7 +85,8 @@ public:
 	//Exercicio: implementar as duas funcoes abaixo supondo que nao ha um membro de dados dataSize (o calculo do tamanho da lista seria dinamico)
 	void empty() const {return size() == 0;};
 	//int size() const {return dataSize;}; // na STL List, a funcao size() calcula o tamanho da lista dinamicamente (exercicio: qual a ordem de complexidade?)
-	
+	int size() const;
+	int size(iterator curr) const;
 private:
 	Node<T> *dataFirst, * dataLast;
 	int dataSize; //quantos elementos ha na lista?
@@ -157,6 +158,21 @@ MyList2<T> & MyList2<T>::operator=(const MyList2 &other) {
 		}
 	}
 	return *this;
+}
+
+template<class T>
+int MyList2<T>::size() const{
+	iterator curr = dataLast;
+	return size(curr);
+}
+
+template<class T>
+int MyList2<T>::size(iterator curr) const {
+	if(curr==NULL)
+		return 0;
+	else 
+	return size(curr->prev)+1;
+
 }
 
 
