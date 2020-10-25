@@ -3,7 +3,7 @@
 using namespace std;
 
 
-void testaPushFront() {
+/*void testaPushFront() {
   MyList2<char> v;
   cout << v << endl;
   v.push_front('a');
@@ -13,7 +13,7 @@ void testaPushFront() {
     cout << v << endl;
   }
 }
-
+*/
 void testaConstrutoresEtc() {
   MyList2<char> v;
   cout << v << endl;
@@ -63,7 +63,7 @@ void testaConstrutoresEtc() {
 }
 
 //descomente o codigo dessa funcao para apos terminar a etapa 3 da aula pratica
-/*void testaEraseMatchingElements() {
+void testaEraseMatchingElements() {
   int n, numErase;
   cin >> n >> numErase;
   MyList2<string> v; //Realiza testes com strings...
@@ -85,7 +85,7 @@ void testaConstrutoresEtc() {
       cout << v << endl;
     }
 }
-
+/*
 void testaReverse() {
   int n;
   cin >> n;
@@ -111,7 +111,7 @@ typename MyList2<T>::iterator find(const T&elem, const MyList2<T> &list) { //fun
     it = list.next(it);
   }
   return it;
-}*/
+}
 
 void testaInsert() {
   int n,numInserts;
@@ -138,7 +138,7 @@ void testaInsert() {
     cout << v << endl;
     cout << "Size: " << v.size() << endl;
   }
-}
+}*/
 /*
 void testaCompare() {
 int n,numCompares;
@@ -220,19 +220,19 @@ int main() {
 
   if(tipoTeste=='E') { //testes com funcao eraseMatchingElements...
     cout << "Testes com eraseMatchingElements" << endl;
-    //testaEraseMatchingElements();
+    testaEraseMatchingElements();
   } else if(tipoTeste=='R') { //testes com funcao reverse
     cout << "Testes com reverse" << endl;
     //testaReverse();
   } else if(tipoTeste=='I') {
     cout << "Testes com insert" << endl;
-    testaInsert();
+    //testaInsert();
   } else if(tipoTeste=='C') {
     cout << "Testes com compare" << endl;
     //testaCompare();
   } else {
     cout << "Testes gerais" << endl;
-    testaPushFront();
+    //testaPushFront();
     //testaConstrutoresEtc();
   }
 }
