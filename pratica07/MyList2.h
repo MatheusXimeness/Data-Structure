@@ -88,7 +88,9 @@ public:
 	void empty() const {return size() == 0;};
 	//int size() const {return dataSize;}; // na STL List, a funcao size() calcula o tamanho da lista dinamicamente (exercicio: qual a ordem de complexidade?)
 	int size() const;
-	int size(iterator curr) const;
+	
+	void reverse();
+	
 private:
 	Node<T> *dataFirst, * dataLast;
 	int dataSize; //quantos elementos ha na lista?
@@ -96,6 +98,8 @@ private:
 	void create();
 	void destroy();
 	void destroy(iterator it);
+	int size(iterator curr) const;
+	void reverse(Node<T>*, Node<T>*);
 };
 
 
@@ -181,7 +185,31 @@ MyList2<T> & MyList2<T>::operator=(const MyList2 &other) {
 // ---------- Função Reverse Recursiva ------------ //
 
 	template<class T>
+	void MyList2<T>::reverse(){
+		int cont=0;
+		Node<T> *aux;
+		Node<T>* ptr = dataFirst;
+		reverse(dataFirst, aux);
+		dataFirst = dataLast;
+		dataLast = ptr;
+	}
 
+	template<class T>
+	void MyList2<T>::reverse(Node<T>*rev, Node<T>* aux){
+		if(size()==0){
+			return;
+		}else if(rev->next==end()){
+			aux = rev->prev;
+			rev->prev = rev->next;
+			rev->next = aux;
+			return;
+		} else {
+			reverse(rev->next,aux);
+		 	aux = rev->prev;
+			rev->prev = rev->next;
+			rev->next = aux;
+		}
+	}
 // -------------- //
 
 
