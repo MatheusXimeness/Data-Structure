@@ -66,6 +66,8 @@ public:
 	iterator erase(iterator elem); //remove o elemento apontado por Elem
 														//retorna o (apontador) para o elemento apos o removido
 
+	int eraseMatchingElements(const T&elem);
+
 	iterator begin() {return dataFirst;} //Exercicio: e se tivermos uma lista constante, como itera-la para, por exemplo, imprimir os elementos?
 	iterator end() {return NULL;} //retorna um apontador para um nodo que estaria APOS o final da lista
 	iterator  next(iterator curr);
@@ -160,20 +162,27 @@ MyList2<T> & MyList2<T>::operator=(const MyList2 &other) {
 	return *this;
 }
 
-template<class T>
-int MyList2<T>::size() const{
-	iterator curr = dataLast;
-	return size(curr);
-}
+// ---------- Função Size Recursiva ------------ //
+	template<class T>
+	int MyList2<T>::size() const{
+		iterator curr = dataLast;
+		return size(curr);
+	}
 
-template<class T>
-int MyList2<T>::size(iterator curr) const {
-	if(curr==NULL)
-		return 0;
-	else 
-	return size(curr->prev)+1;
+	template<class T>
+	int MyList2<T>::size(iterator curr) const {
+		if(curr==NULL)
+			return 0;
+		else 
+			return size(curr->prev)+1;
+	}
+// -------------- //
 
-}
+// ---------- Função Reverse Recursiva ------------ //
+
+	template<class T>
+
+// -------------- //
 
 
 //---------------------------------------------------------------------------------------
@@ -266,6 +275,26 @@ typename MyList2<T>::iterator MyList2<T>::erase(iterator elem) { //remove o elem
 		return beforeElem->next;
 	}
 }
+
+// --------------- Função EraseMatching Elements --------------- //
+
+	template<class T>
+	int MyList2<T>::eraseMatchingElements(const T&elem){
+		iterator val = begin();
+		int cont = 0;
+		while(val!=end()){
+			if(elem==val->data){
+				val = erase(val);
+				cont++;
+			}else 
+				val = val->next;
+		}
+		delete val;
+		return cont;
+	}
+
+// ---------------- //
+
 
 template<class T>
 typename MyList2<T>::iterator MyList2<T>::next(iterator curr) {
