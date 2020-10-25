@@ -62,6 +62,7 @@ void testaConstrutoresEtc() {
 
 }
 
+/*
 //descomente o codigo dessa funcao para apos terminar a etapa 3 da aula pratica
 void testaEraseMatchingElements() {
   int n, numErase;
@@ -84,8 +85,9 @@ void testaEraseMatchingElements() {
       cout << "Nova lista: ";
       cout << v << endl;
     }
-}
-/*
+}*/
+
+
 void testaReverse() {
   int n;
   cin >> n;
@@ -103,7 +105,7 @@ void testaReverse() {
   cout << v << endl;
 }
 
-
+/*
 template<class T>
 typename MyList2<T>::iterator find(const T&elem, const MyList2<T> &list) { //funcao auxiliar para os testes
   typename MyList2<T>::iterator it = list.begin();
@@ -220,10 +222,10 @@ int main() {
 
   if(tipoTeste=='E') { //testes com funcao eraseMatchingElements...
     cout << "Testes com eraseMatchingElements" << endl;
-    testaEraseMatchingElements();
+    //testaEraseMatchingElements();
   } else if(tipoTeste=='R') { //testes com funcao reverse
     cout << "Testes com reverse" << endl;
-    //testaReverse();
+    testaReverse();
   } else if(tipoTeste=='I') {
     cout << "Testes com insert" << endl;
     //testaInsert();
