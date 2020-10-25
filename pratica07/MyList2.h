@@ -30,10 +30,10 @@ class Node;
 template<class T>
 class Node { //a classe Node sera "escondida" quando trabalharmos com iteradores
 	public:
-		Node(const T&elem): data(elem), next(NULL), prev(NULL) {}
+		Node(const T&elem): data(elem), next(NULL), prev(NULL) {} // forma de inicialização dos dados
 		T data;
-		Node<T> *next;
-		Node<T> *prev;
+		Node<T> *next; //aponta para o próximo nodo
+		Node<T> *prev; //aponta para o nodo anterior
 };
 
 template<class T>
@@ -84,8 +84,8 @@ public:
 
 	//Exercicio: implementar as duas funcoes abaixo supondo que nao ha um membro de dados dataSize (o calculo do tamanho da lista seria dinamico)
 	void empty() const {return size() == 0;};
-	int size() const {return dataSize;}; // na STL List, a funcao size() calcula o tamanho da lista dinamicamente (exercicio: qual a ordem de complexidade?)
-
+	//int size() const {return dataSize;}; // na STL List, a funcao size() calcula o tamanho da lista dinamicamente (exercicio: qual a ordem de complexidade?)
+	
 private:
 	Node<T> *dataFirst, * dataLast;
 	int dataSize; //quantos elementos ha na lista?
@@ -105,7 +105,7 @@ private:
 //first (incluindo first)
 template<class T>
 void MyList2<T>::destroy(MyList2<T>::iterator first) {
-	if(first==NULL) return;
+	if(first==NULL) return; //lista vazia
 	destroy(first->next);
 	delete first;
 }
@@ -145,8 +145,9 @@ template<class T>
 MyList2<T> & MyList2<T>::operator=(const MyList2 &other) {
 	if(this==&other) return *this; 
 	clear(); //Exercicio: por que precisamos disso?
+	// Para que os valores antigos da lista sejam removidos corretamente e assim preparar da forma certa a nova atribuição
 
-	if(other.dataFirst == NULL) {
+	if(other.dataFirst == NULL) { // caso especial
 		dataFirst = dataLast = NULL;
 	} else {
 		Node<T> *curr = other.dataFirst;
@@ -176,7 +177,16 @@ void MyList2<T>::push_back(const T&elem) {
 
 template<class T>
 void MyList2<T>::push_front(const T&elem) {
-	//implemente esta funcao
+	//para inserir um novo elemento é preciso:
+	//criar um novo nodo, saber para onde ele aponta(dataFirst->next), colocar o elem, renovar o dataFirst
+	if(dataFirst==NULL){ // caso especial: lista vazia
+		dataLast = dataFirst = new Node<T>(elem);
+	} else {
+		dataFirst->prev = new Node<T>(elem);
+		dataFirst->prev->next = dataFirst;
+		dataFirst->prev = dataFirst;
+	}
+	dataSize++;
 }
 
 
@@ -187,7 +197,19 @@ void MyList2<T>::push_front(const T&elem) {
 //eficiente na lista duplamente encadeada
 template<class T>
 void MyList2<T>::insert(const T&elem, iterator where) {
-	//implemente esta funcao
+	Node<T> *nodeBefore = where;
+	Node<T> *newNode = new Node<T>(elem);
+	if(dataFirst == NULL){
+		push_front(elem);
+	} else if(nodeBefore->next==NULL){
+		push_back(elem);
+	} else {
+		newNode->next = nodeBefore->next; //o novo nodo aponta para onde o antigo apontava
+		nodeBefore->next = newNode;	//o proximo do antigo agora aponta para o  novo
+		newNode->prev = nodeBefore;	//o prev do newNode aponta para o nodeBefore
+		newNode->next->prev = newNode; // o prev do sucessor aponta para o newNode
+		dataSize++;
+	}
 }
 
 
