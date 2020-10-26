@@ -90,6 +90,7 @@ public:
 	int size() const;
 	
 	void reverse();
+	bool compare(Node<T>*, Node<T>*);
 	
 private:
 	Node<T> *dataFirst, * dataLast;
@@ -212,6 +213,20 @@ MyList2<T> & MyList2<T>::operator=(const MyList2 &other) {
 	}
 // -------------- //
 
+// ---------- Função Compare ------------ //
+
+	template<class T>
+	bool MyList2<T>::compare(Node<T>* it1, Node<T>* it2){
+	if(it1 == it2) 
+		return false;
+	if(it1->next == it2)
+		return true;
+	if(it1->next == NULL)
+		return false;
+	return compare(it1->next,it2);
+}
+
+// -------------- //
 
 //---------------------------------------------------------------------------------------
 //Funcoes de acesso
@@ -237,7 +252,7 @@ void MyList2<T>::push_front(const T&elem) {
 	} else {
 		dataFirst->prev = new Node<T>(elem);
 		dataFirst->prev->next = dataFirst;
-		dataFirst->prev = dataFirst;
+		dataFirst = dataFirst->prev;
 	}
 	dataSize++;
 }
@@ -251,16 +266,16 @@ void MyList2<T>::push_front(const T&elem) {
 template<class T>
 void MyList2<T>::insert(const T&elem, iterator where) {
 	Node<T> *nodeBefore = where;
-	Node<T> *newNode = new Node<T>(elem);
-	if(dataFirst == NULL){
+	if(nodeBefore == begin()){
 		push_front(elem);
-	} else if(nodeBefore->next==NULL){
+	} else if(nodeBefore==end()){
 		push_back(elem);
 	} else {
-		newNode->next = nodeBefore->next; //o novo nodo aponta para onde o antigo apontava
-		nodeBefore->next = newNode;	//o proximo do antigo agora aponta para o  novo
-		newNode->prev = nodeBefore;	//o prev do newNode aponta para o nodeBefore
-		newNode->next->prev = newNode; // o prev do sucessor aponta para o newNode
+		Node<T> *newNode = new Node<T>(elem);
+		nodeBefore->prev->next = newNode;
+		newNode->prev = nodeBefore->prev;
+		newNode->next = nodeBefore;
+		nodeBefore->prev = newNode;
 		dataSize++;
 	}
 }

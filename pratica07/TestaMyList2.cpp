@@ -3,7 +3,7 @@
 using namespace std;
 
 
-/*void testaPushFront() {
+void testaPushFront() {
   MyList2<char> v;
   cout << v << endl;
   v.push_front('a');
@@ -13,7 +13,7 @@ using namespace std;
     cout << v << endl;
   }
 }
-*/
+
 void testaConstrutoresEtc() {
   MyList2<char> v;
   cout << v << endl;
@@ -62,7 +62,7 @@ void testaConstrutoresEtc() {
 
 }
 
-/*
+
 //descomente o codigo dessa funcao para apos terminar a etapa 3 da aula pratica
 void testaEraseMatchingElements() {
   int n, numErase;
@@ -85,7 +85,7 @@ void testaEraseMatchingElements() {
       cout << "Nova lista: ";
       cout << v << endl;
     }
-}*/
+}
 
 
 void testaReverse() {
@@ -105,7 +105,7 @@ void testaReverse() {
   cout << v << endl;
 }
 
-/*
+
 template<class T>
 typename MyList2<T>::iterator find(const T&elem, const MyList2<T> &list) { //funcao auxiliar para os testes
   typename MyList2<T>::iterator it = list.begin();
@@ -138,10 +138,9 @@ void testaInsert() {
     v.insert(st,it);
     cout << "V apos a insercao de " << st << " na posicao " << posInsert << endl;
     cout << v << endl;
-    cout << "Size: " << v.size() << endl;
   }
-}*/
-/*
+}
+
 void testaCompare() {
 int n,numCompares;
   cin >> n >> numCompares;
@@ -168,7 +167,7 @@ int n,numCompares;
 
     cout << "Comparando posicoes: " << a << " " << b << " : " << ((v.compare(it1,it2))?"true":"false") << endl;
   }
-}*/
+}
 
 /*
 O arquivo de entrada contem um tipo de teste (ou testes com a funcao eraseMatchingElements ou testes com a funcao reverse ou testes mais gerais com a criacao/destruicao de listas)
@@ -222,20 +221,20 @@ int main() {
 
   if(tipoTeste=='E') { //testes com funcao eraseMatchingElements...
     cout << "Testes com eraseMatchingElements" << endl;
-    //testaEraseMatchingElements();
+    testaEraseMatchingElements();
   } else if(tipoTeste=='R') { //testes com funcao reverse
     cout << "Testes com reverse" << endl;
     testaReverse();
   } else if(tipoTeste=='I') {
     cout << "Testes com insert" << endl;
-    //testaInsert();
+    testaInsert();
   } else if(tipoTeste=='C') {
     cout << "Testes com compare" << endl;
-    //testaCompare();
+    testaCompare();
   } else {
     cout << "Testes gerais" << endl;
-    //testaPushFront();
-    //testaConstrutoresEtc();
+    testaPushFront();
+    testaConstrutoresEtc();
   }
 }
 
