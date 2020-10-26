@@ -252,7 +252,7 @@ void MyList2<T>::push_front(const T&elem) {
 	} else {
 		dataFirst->prev = new Node<T>(elem);
 		dataFirst->prev->next = dataFirst;
-		dataFirst = dataFirst->prev;
+		dataFirst = dataFirst->prev; 
 	}
 	dataSize++;
 }
