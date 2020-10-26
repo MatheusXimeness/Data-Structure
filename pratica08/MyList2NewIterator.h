@@ -53,7 +53,7 @@ public:
 	typedef MyList2Iterator<T> iterator; //define um iterador, um tipo utilizado para percorrer uma estrutura de dados e "apontar" para os items armazenados nela
 
 	template<class T2>
-	friend std::ostream& operator<<(std::ostream &, const MyList2<T2> &);
+	friend std::ostream& operator<<(std::ostream &, MyList2<T2>& );
 
 	//construtores/destrutures/etc
 	MyList2();
@@ -84,9 +84,10 @@ public:
 	void clear();
 
 	//Exercicio: implementar as duas funcoes abaixo supondo que nao ha um membro de dados dataSize (o calculo do tamanho da lista seria dinamico)
-	bool empty() const {return size() == 0;}
-	int size() const {return -1; /*etapa 2: implemente esta funcao sem usar o membro de dados dataSize*/ } // na STL List, a funcao size() calcula o tamanho da lista dinamicamente (exercicio: qual a ordem de complexidade?)
-
+	//bool empty() const {return size() == 0;}
+	//int size() const {return -1; /*etapa 2: implemente esta funcao sem usar o membro de dados dataSize*/ } // na STL List, a funcao size() calcula o tamanho da lista dinamicamente (exercicio: qual a ordem de complexidade?)
+	int size();
+	bool empty();
 private:
 	Node<T> *dataFirst, * dataLast;
 	int dataSize; //quantos elementos ha na lista?
@@ -130,6 +131,7 @@ private:
 
 
 //pre incremento/decremento
+//y = ++x; => y = x+1;
 template<class T>
 MyList2Iterator<T> MyList2Iterator<T>::operator++() {
 	ptr = ptr->next;
@@ -146,18 +148,19 @@ MyList2Iterator<T> MyList2Iterator<T>::operator--() {
 //pos incremento/decremento
 //o argumento (int) eh uma convencao do C++ usada para diferenciar a implementacao
 // do operador de pos e pre incremento
+//y = x++; => y = x; x = x+1;
 template<class T>
-MyList2Iterator<T> MyList2Iterator<T>::operator++(int) {
-	//Termine esta implementacao...
-
-
+MyList2Iterator<T> MyList2Iterator<T>::operator++(int i) {
+	Node<T> *aux = ptr;
+	ptr = ptr->next;
+	return aux;
 }
 
 template<class T>
-MyList2Iterator<T> MyList2Iterator<T>::operator--(int) {
-	//Termine esta implementacao...	
-
-
+MyList2Iterator<T> MyList2Iterator<T>::operator--(int i) {
+	Node<T> *aux = ptr;
+	ptr = ptr->prev;
+	return aux;
 }
 
 
@@ -219,6 +222,35 @@ MyList2<T> & MyList2<T>::operator=(const MyList2 &other) {
 	}
 	return *this;
 }
+
+// ----------------- Função size e empty ---------------- //
+
+	template<class T>
+	int MyList2<T>::size(){
+		int cont = 0;
+		iterator sz = dataFirst;
+		while(sz!=end()){
+			sz++;
+			cont++;
+		}
+		return cont;
+	}
+
+	template<class T>
+	bool MyList2<T>::empty(){
+		int cont = 0;
+		iterator sz = dataFirst;
+		while(sz!=end()){
+			sz++;
+			cont++;
+		}
+		if(cont==0)
+			return true;
+		else
+			return false;
+	}
+
+// ----------------- //
 
 
 //---------------------------------------------------------------------------------------
@@ -325,7 +357,7 @@ typename MyList2<T>::iterator MyList2<T>::erase(iterator elemIt) { //remove o el
 
 
 template<class T2>
-std::ostream& operator<<(std::ostream &out, const MyList2<T2> &v) {
+std::ostream& operator<<(std::ostream &out, MyList2<T2> &v) {
 	out << "Size: " << v.size() << "\n";
 	/* //usando iteradores para abstrairem a iteracao
 	MyList2<T2>::iterator it = v.begin();
