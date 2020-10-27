@@ -3,11 +3,59 @@
 using namespace std;
 
 
-//implemente aqui a funcao nao-membro reverse (etapa 4):
+//implemente aqui a funcao nao-membro reverse (etapa 3):
 template <class T>
 void reverse(MyList2<T> &lista) {
+  if(lista.empty()){
+      return;
+  } else if(lista.size()==1){
+      typename MyList2<int>::iterator itToFirst = lista.begin();
+      typename MyList2<int>::iterator itToLast =  lista.begin();
+      while(itToLast!=lista.end()) itToLast++;
+      MyList2<int>::iterator aux = lista.begin();
+      aux = itToFirst;
+      itToFirst = itToLast;
+      itToLast = aux;
+      return;
+  } else{
+      typename MyList2<int>::iterator itToFirst = lista.begin();
+      typename MyList2<int>::iterator itToFirst2 = lista.begin();
+      typename MyList2<int>::iterator itToLast =  lista.begin();
+    
+      while(itToLast!=lista.end()) itToLast++;
+      cout << *(itToLast) << endl;
+      MyList2<int>::iterator aux = lista.begin();
 
+      reverse(lista,itToFirst, aux);
+      
+      lista.begin() = itToLast;
+      itToLast = itToFirst2;
+      cout << "cabou a recursão" << endl;
+  }
 }
+
+  template <class T>
+	void reverse(MyList2<T> &lista, MyList2<int>::iterator first, MyList2<int>::iterator aux){
+    cout << "inicio da recursão" << endl;
+		if(lista.size()==0){
+      cout << "lista vazia" << endl;
+			return;
+      
+		}else if(first++==lista.end()){
+      cout << "um elemento" << endl;
+			aux = first--;
+			first-- = first++;
+			first++ = aux;
+			return;
+		} else {
+      cout << "mais que um elemento" << endl;
+			reverse(lista,first++,aux);
+		 	aux = first--;
+			first-- = first++;
+			first++ = aux;
+		}
+	}
+
 
 
 void testesSizeEmpty() {
@@ -105,7 +153,7 @@ void testaReverse() {
 
   for(int i=0;i<6;i++) {
     MyList2<int> l2 = l1;
-    reverse(l2);
+    reverse(l1);
     cout << "Lista: " << endl << l1 << " Reverse: " << endl << l2 << endl << "--------------" << endl;
     l1.push_back(i);
   }
