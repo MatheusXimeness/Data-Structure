@@ -53,7 +53,7 @@ public:
 	typedef MyList2Iterator<T> iterator; //define um iterador, um tipo utilizado para percorrer uma estrutura de dados e "apontar" para os items armazenados nela
 
 	template<class T2>
-	friend std::ostream& operator<<(std::ostream &, MyList2<T2>& );
+	friend std::ostream& operator<<(std::ostream &, const MyList2<T2>& );
 
 	//construtores/destrutures/etc
 	MyList2();
@@ -357,8 +357,8 @@ typename MyList2<T>::iterator MyList2<T>::erase(iterator elemIt) { //remove o el
 
 
 template<class T2>
-std::ostream& operator<<(std::ostream &out, MyList2<T2> &v) {
-	out << "Size: " << v.size() << "\n";
+std::ostream& operator<<(std::ostream &out, const MyList2<T2> &v) {
+	//out << "Size: " << v.size() << "\n";
 	/* //usando iteradores para abstrairem a iteracao
 	MyList2<T2>::iterator it = v.begin();
 	while(it!=v.end()) {
