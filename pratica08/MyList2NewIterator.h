@@ -10,6 +10,7 @@ TAD MyList2
 #include <iostream>
 #include <string>
 #include <ostream>
+using namespace std;
 
 
 //Excessao usada pela classe MyList2
