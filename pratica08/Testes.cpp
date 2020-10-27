@@ -9,21 +9,20 @@ void reverse(MyList2<T> &lista) {
   if(lista.empty()){
       return;
   } else if(lista.size()==1){
-      typename MyList2<int>::iterator itToFirst = lista.begin();
-      typename MyList2<int>::iterator itToLast =  lista.begin();
+      if(lista.begin())
+        MyList2<int>::iterator itToFirst = lista.begin();
+        MyList2<int>::iterator itToFirst2 = lista.begin();
+        MyList2<int>::iterator itToLast =  lista.begin();
+        MyList2<int>::iterator aux = lista.begin();
       while(itToLast!=lista.end()) itToLast++;
-      MyList2<int>::iterator aux = lista.begin();
+      
       aux = itToFirst;
       itToFirst = itToLast;
       itToLast = aux;
       return;
   } else{
-      typename MyList2<int>::iterator itToFirst = lista.begin();
-      typename MyList2<int>::iterator itToFirst2 = lista.begin();
-      typename MyList2<int>::iterator itToLast =  lista.begin();
-    
       while(itToLast!=lista.end()) itToLast++;
-      cout << *(itToLast) << endl;
+
       MyList2<int>::iterator aux = lista.begin();
 
       reverse(lista,itToFirst, aux);
@@ -49,7 +48,7 @@ void reverse(MyList2<T> &lista) {
 			return;
 		} else {
       cout << "mais que um elemento" << endl;
-			reverse(lista,first++,aux);
+			reverse(lista,++first,aux);
 		 	aux = first--;
 			first-- = first++;
 			first++ = aux;
