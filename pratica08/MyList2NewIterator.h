@@ -51,8 +51,9 @@ template<class T>
 class MyList2 {
 public:
 	//decidimos utilizar o typedef com o objetivo de "abstrair" o conceito de iterador (a utilidade disso sera vista posteriormente)
+	friend MyList2Iterator<T>;
 	typedef MyList2Iterator<T> iterator; //define um iterador, um tipo utilizado para percorrer uma estrutura de dados e "apontar" para os items armazenados nela
-
+	
 	template<class T2>
 	friend std::ostream& operator<<(std::ostream &,MyList2<T2>& );
 
@@ -77,8 +78,8 @@ public:
 	iterator erase(iterator elem); //remove o elemento apontado por Elem
 														//retorna o (apontador) para o elemento apos o removido
 
-	iterator begin() {return iterator(dataFirst,dataLast);} //Exercicio: e se tivermos uma lista constante, como itera-la para, por exemplo, imprimir os elementos?
-	iterator end() {return iterator(NULL, dataLast);} //retorna um apontador para um nodo que estaria APOS o final da lista
+	iterator begin() {return iterator(dataFirst, this);} //Exercicio: e se tivermos uma lista constante, como itera-la para, por exemplo, imprimir os elementos?
+	iterator end() {return iterator(NULL, this);} //retorna um apontador para um nodo que estaria APOS o final da lista
 		
 	//por simplicidade, nao vamos criar iteradores constantes...
 
@@ -103,7 +104,7 @@ template<class T>
 class MyList2Iterator {
 	friend class MyList2<T>;
 public:
-	MyList2Iterator(Node<T> *ptr_, Node<T> *last): ptr(ptr_), ptr2(last)  {}
+	MyList2Iterator(Node<T> *ptr_,MyList2<T> *list): ptr(ptr_), lista(list) {}
 
 	T &operator*() {return ptr->data;}
 	const T &operator*() const {return ptr->data;} //versao constante do operador de derreferencia
@@ -129,9 +130,7 @@ public:
 
 private:
 	Node<T> *ptr;
-	Node<T> *ptr2;
-
-
+	MyList2<T> *lista;
 };
 
 
@@ -145,12 +144,13 @@ MyList2Iterator<T> MyList2Iterator<T>::operator++() {
 
 template<class T>
 MyList2Iterator<T> MyList2Iterator<T>::operator--() {
-	cout << "entrei no pre incremento" << endl;
-	if(ptr==NULL){
-		return ptr2;
+
+	if(*this == lista->end()){
+		ptr = lista->dataLast;
+	}else{
+		ptr = ptr->prev;
 	}
-	ptr = ptr->prev;
-	return ptr;
+	return *this;
 }
 
 //pos incremento/decremento
@@ -159,22 +159,23 @@ MyList2Iterator<T> MyList2Iterator<T>::operator--() {
 //y = x++; => y = x; x = x+1;
 template<class T>
 MyList2Iterator<T> MyList2Iterator<T>::operator++(int i) {
-	Node<T> *aux = ptr;
+	MyList2Iterator<T> oldIt= *this;
 	ptr = ptr->next;
-	return aux;
+	return oldIt;
 }
 
 template<class T>
 MyList2Iterator<T> MyList2Iterator<T>::operator--(int i) {
-	cout << "entrei no pre incremento" << endl;
 
-	if(ptr==NULL){
-		cout << "ptr é null" << endl;
-		return ptr2;
+	MyList2Iterator<T> oldIt= *this;
+	if(oldIt == lista->end()){
+		ptr = lista->dataLast;
+
+	} else {
+		ptr = ptr->prev;
 	}
-	Node<T> *aux = ptr;
-	ptr = ptr->prev;
-	return aux;
+	return oldIt;
+	
 }
 
 
