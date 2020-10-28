@@ -1,59 +1,36 @@
 #include <iostream>
 #include "MyList2NewIterator.h"
+#include <cstdlib>
 using namespace std;
 
 
 //implemente aqui a funcao nao-membro reverse (etapa 3):
 template <class T>
 void reverse(MyList2<T> &lista) {
-  if(lista.empty()){
-      return;
-  } else if(lista.size()==1){
-      if(lista.begin())
-        MyList2<int>::iterator itToFirst = lista.begin();
-        MyList2<int>::iterator itToFirst2 = lista.begin();
-        MyList2<int>::iterator itToLast =  lista.begin();
-        MyList2<int>::iterator aux = lista.begin();
-      while(itToLast!=lista.end()) itToLast++;
-      
-      aux = itToFirst;
-      itToFirst = itToLast;
-      itToLast = aux;
-      return;
-  } else{
-      while(itToLast!=lista.end()) itToLast++;
-
-      MyList2<int>::iterator aux = lista.begin();
-
-      reverse(lista,itToFirst, aux);
-      
-      lista.begin() = itToLast;
-      itToLast = itToFirst2;
-      cout << "cabou a recursão" << endl;
+  typename MyList2<T>::iterator itToFirst = lista.begin();
+  typename MyList2<T>::iterator itToLast =  lista.begin();
+  typename MyList2<T>::iterator itAux =  lista.begin();
+  if(itToFirst==lista.end()){
+    return;
   }
+  int cont =0;
+  while(itToFirst!=lista.end()) {
+    cont++;
+    itToLast=itToFirst;
+    ++itToFirst;
+  }
+  itToFirst = itAux;
+  for(int i=0;i<=(cont/2);i++){
+    if(cont%2==0 && i==cont/2){
+      itToFirst++;
+      itToLast--;
+    }else{
+      swap(*itToFirst,*itToLast);
+      itToFirst++;
+      itToLast--;
+    }
+  }  
 }
-
-  template <class T>
-	void reverse(MyList2<T> &lista, MyList2<int>::iterator first, MyList2<int>::iterator aux){
-    cout << "inicio da recursão" << endl;
-		if(lista.size()==0){
-      cout << "lista vazia" << endl;
-			return;
-      
-		}else if(first++==lista.end()){
-      cout << "um elemento" << endl;
-			aux = first--;
-			first-- = first++;
-			first++ = aux;
-			return;
-		} else {
-      cout << "mais que um elemento" << endl;
-			reverse(lista,++first,aux);
-		 	aux = first--;
-			first-- = first++;
-			first++ = aux;
-		}
-	}
 
 
 
@@ -152,7 +129,7 @@ void testaReverse() {
 
   for(int i=0;i<6;i++) {
     MyList2<int> l2 = l1;
-    reverse(l1);
+    reverse(l2);
     cout << "Lista: " << endl << l1 << " Reverse: " << endl << l2 << endl << "--------------" << endl;
     l1.push_back(i);
   }
