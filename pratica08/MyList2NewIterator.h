@@ -54,7 +54,7 @@ public:
 	typedef MyList2Iterator<T> iterator; //define um iterador, um tipo utilizado para percorrer uma estrutura de dados e "apontar" para os items armazenados nela
 
 	template<class T2>
-	friend std::ostream& operator<<(std::ostream &, const MyList2<T2>& );
+	friend std::ostream& operator<<(std::ostream &,MyList2<T2>& );
 
 	//construtores/destrutures/etc
 	MyList2();
@@ -77,8 +77,8 @@ public:
 	iterator erase(iterator elem); //remove o elemento apontado por Elem
 														//retorna o (apontador) para o elemento apos o removido
 
-	iterator begin() {return iterator(dataFirst);} //Exercicio: e se tivermos uma lista constante, como itera-la para, por exemplo, imprimir os elementos?
-	iterator end() {return iterator(NULL);} //retorna um apontador para um nodo que estaria APOS o final da lista
+	iterator begin() {return iterator(dataFirst,dataLast);} //Exercicio: e se tivermos uma lista constante, como itera-la para, por exemplo, imprimir os elementos?
+	iterator end() {return iterator(NULL, dataLast);} //retorna um apontador para um nodo que estaria APOS o final da lista
 		
 	//por simplicidade, nao vamos criar iteradores constantes...
 
@@ -103,7 +103,8 @@ template<class T>
 class MyList2Iterator {
 	friend class MyList2<T>;
 public:
-	MyList2Iterator(Node<T> *ptr_): ptr(ptr_) {}
+	MyList2Iterator(Node<T> *ptr_, Node<T> *last): ptr(ptr_), ptr2(last)  {}
+
 	T &operator*() {return ptr->data;}
 	const T &operator*() const {return ptr->data;} //versao constante do operador de derreferencia
 
@@ -128,6 +129,9 @@ public:
 
 private:
 	Node<T> *ptr;
+	Node<T> *ptr2;
+
+
 };
 
 
@@ -141,9 +145,12 @@ MyList2Iterator<T> MyList2Iterator<T>::operator++() {
 
 template<class T>
 MyList2Iterator<T> MyList2Iterator<T>::operator--() {
-	ptr = ptr->prev;		
-	
-	return *this;
+	cout << "entrei no pre incremento" << endl;
+	if(ptr==NULL){
+		return ptr2;
+	}
+	ptr = ptr->prev;
+	return ptr;
 }
 
 //pos incremento/decremento
@@ -159,6 +166,12 @@ MyList2Iterator<T> MyList2Iterator<T>::operator++(int i) {
 
 template<class T>
 MyList2Iterator<T> MyList2Iterator<T>::operator--(int i) {
+	cout << "entrei no pre incremento" << endl;
+
+	if(ptr==NULL){
+		cout << "ptr é null" << endl;
+		return ptr2;
+	}
 	Node<T> *aux = ptr;
 	ptr = ptr->prev;
 	return aux;
@@ -229,7 +242,7 @@ MyList2<T> & MyList2<T>::operator=(const MyList2 &other) {
 	template<class T>
 	int MyList2<T>::size(){
 		int cont = 0;
-		iterator sz = dataFirst;
+		iterator sz = begin();
 		while(sz!=end()){
 			sz++;
 			cont++;
@@ -240,7 +253,7 @@ MyList2<T> & MyList2<T>::operator=(const MyList2 &other) {
 	template<class T>
 	bool MyList2<T>::empty(){
 		int cont = 0;
-		iterator sz = dataFirst;
+		iterator sz = begin();
 		while(sz!=end()){
 			sz++;
 			cont++;
@@ -358,8 +371,8 @@ typename MyList2<T>::iterator MyList2<T>::erase(iterator elemIt) { //remove o el
 
 
 template<class T2>
-std::ostream& operator<<(std::ostream &out, const MyList2<T2> &v) {
-	//out << "Size: " << v.size() << "\n";
+std::ostream& operator<<(std::ostream &out,MyList2<T2> &v) {
+	out << "Size: " << v.size() << "\n";
 	/* //usando iteradores para abstrairem a iteracao
 	MyList2<T2>::iterator it = v.begin();
 	while(it!=v.end()) {
