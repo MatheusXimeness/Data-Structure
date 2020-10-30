@@ -7,10 +7,31 @@ using namespace std;
 
 //Voce pode adicionar includes como o abaixo...
 //#include "MyStack.h"
+#include "MyStack.h"
+#include "MyQueue.h"
 
 
 void etapa1() {
-	
+	int n = 6;
+	MyStack<int> pilha;
+	MyQueue<int> fila;
+	for(int i=0;i<n;i++){
+		int value; cin >> value;
+		pilha.push(value);
+		fila.push(value);
+	}
+
+	while(!pilha.empty()){
+		cout << pilha.top() << " ";
+		pilha.pop();
+	}
+	cout << '\n';
+
+	while(!fila.empty()){
+		cout << fila.front() << " ";
+		fila.pop();
+	}
+	cout << '\n';
 }
 
 //---------------------------------------
@@ -18,7 +39,29 @@ void etapa1() {
 // Insira aqui o codigo para a etapa 2....
 
 void etapa2() {
-	
+	MyStack<char> pilha;
+	char symbol;
+	while(cin>>symbol){
+		if(symbol=='(' || symbol=='[' || symbol=='{')
+			pilha.push(symbol);
+			
+		if(pilha.empty() && (symbol==')' || symbol==']' || symbol=='}')){
+			cout << "Inconsistente\n"; return;
+		}
+
+		if(symbol==')' && pilha.top()=='(')
+			pilha.pop();
+		else if(symbol==']' && pilha.top()=='[')
+			pilha.pop();
+		else if(symbol=='}' && pilha.top()=='{')
+			pilha.pop();
+		
+		
+	}
+	if(pilha.empty())
+		cout << "Consistente\n";
+	else
+		cout << "Inconsistente\n";
 }
 
 //---------------------------------------
@@ -27,7 +70,15 @@ void etapa2() {
 
 
 //#include "MyQueue2.h"
+#include "MyPriorityQueue.h"
 void etapa3() {
+	MyPriorityQueue<int> fila;
+	int n; cin >> n;
+	while(cin>>n){
+		fila.push(n);
+	}
+		fila.push(n);
+	fila.print();
 	/*char operacao;
 	MyQueue2<string> q;
 
@@ -51,7 +102,7 @@ void etapa3() {
 
 // Insira aqui o codigo para a etapa 4....
 
-
+#include "MyPriorityQueue.h"
 void etapa4() {
 	
 }
