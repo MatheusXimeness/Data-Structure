@@ -1,0 +1,11 @@
+5 6 3
+food 0 4 20
+food 2 2 10
+step 0 1
+step 0 1
+food 4 4 10
+step 1 0
+step 1 0
+step 1 0
+step 0 -1
+step 0 -1

@@ -1,0 +1,57 @@
+8 10 3
+step 0 1
+step 0 1
+step 0 1
+step 1 0
+food 1 5 11
+step 1 0
+food 1 1 7
+step 1 0
+step 0 -1
+food 3 3 11
+step 0 -1
+step 0 -1
+step -1 0
+step -1 0
+step 0 -1
+food 0 7 14
+step 0 -1
+step 1 0
+step 1 0
+food 3 7 20
+step 0 1
+step 0 1
+step 0 1
+step 0 1
+food 5 7 18
+step 0 1
+step 0 1
+step 0 1
+step -1 0
+step -1 0
+step 0 1
+step 0 1
+step -1 0
+step 0 -1
+step 0 -1
+step 0 -1
+step 1 0
+step 1 0
+step 1 0
+step 1 0
+step 0 1
+step 1 0
+step 1 0
+food 1 2 15
+step 1 0
+step 0 -1
+step 0 -1
+step 0 -1
+step 0 -1
+step 0 -1
+step 0 -1
+step -1 0
+step -1 0
+step -1 0
+step 0 -1
+step 0 -1
