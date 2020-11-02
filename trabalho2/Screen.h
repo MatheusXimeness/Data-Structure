@@ -17,7 +17,7 @@ class Screen {
         get(int r, int c); // estado do pixel nesta posição
         void set(int r, int c, const int val); 
     private:
-        int *data, dataHeight;
+        int *data, *dataHeight;
         int largura, altura; // em termos de números de pixel (??)
 }
 
