@@ -30,6 +30,12 @@ public:
 	iterator end() {return iterator(NULL);}; 
 	iterator begin() ;
 
+	MySet (const MySet &other);
+	MySet &operator=(const MySet &other);
+	~MySet();
+
+	
+
 
 	void imprimeBFS() const;
 	void imprimeDFS_pre() const;
@@ -43,6 +49,9 @@ private:
 	//funcoes auxiliares...
 	pair<iterator,bool> insert(const T&elem, Node<T> *&root,Node<T> *parent); 
 	iterator find(const T&elem, Node<T> *root);
+
+	Node<T> * copyNodes(const Node<T> *root, Node<T> *pai)const;
+	void deleteNodes(Node<T> *root);
 
 
 	void imprimeDFS_pre(const Node<T> *root) const;
@@ -129,11 +138,6 @@ MySetIterator<T>  MySetIterator<T>::operator--(int) {
 }
 
 
-
-
-
-
-
 template  <class T>
 typename MySet<T>::iterator MySet<T>::begin() {
 	if(!root) return end();
@@ -142,12 +146,67 @@ typename MySet<T>::iterator MySet<T>::begin() {
 	return iterator(ptr);
 }
 
+/////////////////////////////////////////////////////
+
+template  <class T>
+Node<T> * MySet<T> :: copyNodes(const Node<T> *root, Node<T> *pai)const{
+	if(root==NULL){
+		return NULL;
+	}
+	
+	Node<T> *newRoot = new Node<T>(root->elem);
+
+	newRoot->parent = pai;
+
+	newRoot->left = copyNodes(root->left, newRoot);
+	newRoot->right = copyNodes(root->right, newRoot);
+
+	return newRoot;
+
+} 
+
+
+template  <class T>
+MySet<T> & MySet<T> :: operator= (const MySet &other){
+	if(this==&other){
+		return *this;
+	}
+
+	deleteNodes(root);
+	root = copyNodes(other.root, NULL);
+	size_ = other.size_;
+
+	return *this;
+}
+
+template  <class T>
+MySet<T> :: MySet (const MySet &other){
+	size_ = 0;
+	root = NULL;
+	*this = other;
+}
+
+
+template  <class T>
+void MySet<T> :: deleteNodes(Node<T> *root){
+	if(!root){
+		return;
+	}
+
+	deleteNodes(root->left);
+	deleteNodes(root->right);
+
+	delete root;
+} 
+
+template  <class T>
+MySet<T> :: ~MySet(){
+	deleteNodes(root);
+}
 
 
 
-
-
-
+///////////////////////////////////////
 
 
 template  <class T>

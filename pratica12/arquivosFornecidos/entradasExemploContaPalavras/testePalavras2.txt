@@ -1,3 +1,0 @@
-abc 123 123 copia copia 
-hello abc
-abc copia copia
