@@ -7,7 +7,7 @@ using namespace std;
 template<class K, class V>
 class MyMapIterator;
 
-template  <class K, class V>
+template  <class K, class V>  
 class Node {
 	public: //classe auxiliar.. vamos utiliza-la apenas neste arquivo (nao e' muito necessario ter encapsulamento)
 		Node(const K &key_, const V&value_) : keyValue(key_,value_),left(NULL), right(NULL) {}
