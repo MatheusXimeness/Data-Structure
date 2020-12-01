@@ -146,10 +146,10 @@ typename MySet<T>::iterator MySet<T>::begin() {
 	return iterator(ptr);
 }
 
-/////////////////////////////////////////////////////
+// ----------- Função para auxiliar o operador de atribuição 
 
 template  <class T>
-Node<T> * MySet<T> :: copyNodes(const Node<T> *root, Node<T> *pai)const{
+Node<T> *MySet<T>::copyNodes(const Node<T> *root, Node<T> *pai)const{
 	if(root==NULL){
 		return NULL;
 	}
@@ -162,12 +162,11 @@ Node<T> * MySet<T> :: copyNodes(const Node<T> *root, Node<T> *pai)const{
 	newRoot->right = copyNodes(root->right, newRoot);
 
 	return newRoot;
-
 } 
 
 
 template  <class T>
-MySet<T> & MySet<T> :: operator= (const MySet &other){
+MySet<T> &MySet<T>::operator=(const MySet &other){
 	if(this==&other){
 		return *this;
 	}
@@ -186,7 +185,6 @@ MySet<T> :: MySet (const MySet &other){
 	*this = other;
 }
 
-
 template  <class T>
 void MySet<T> :: deleteNodes(Node<T> *root){
 	if(!root){
@@ -204,19 +202,17 @@ MySet<T> :: ~MySet(){
 	deleteNodes(root);
 }
 
-
-
-///////////////////////////////////////
-
+// ---------- //
 
 template  <class T>
 int MySet<T>::size() const {
 	return size_; //exercicio: como calcular o tamanho de forma dinamica? (i.e., sem armazenar o inteiro "size" na classe)
-}
+} // armazenando o tamanho de cada sub arvore
 
 
 //funcao auxiliar...
-//exercicio: por que a raiz precisa ser passada por referencia?
+//exercicio: por que a raiz precisa ser passada por referencia? 
+// para que ela possa ser atualizada de fato e deixe de ser só uma cópia
 template  <class T>
 pair<typename MySet<T>::iterator,bool> MySet<T>::insert(const T&elem, Node<T> * &root, Node<T> *parent) { //retorna um iterador para o elemento inserido (o valor booleano sera' true se o elemento nao existia no conjunto e falso caso ele ja exista (ou seja, o novo elemento nao foi inserido) ).
 	if(!root) {
