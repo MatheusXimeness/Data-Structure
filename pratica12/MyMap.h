@@ -266,11 +266,11 @@ int MyMap<K,V>::count(const K&key) const { //retorna 1 se a chave estiver no map
 
 template  <class K, class V>
 V &MyMap<K,V>::operator[](const K&key) { //retorna uma referencia para o valor associado a chave key. Se o valor ainda nao estiver no mapa --> cria um novo usando o construtor padrao.
-	typename MyMap<K,V>::iterator it = find(key);
-	if(it==end()) {
-		it = insert(make_pair(key,V())).first; //se chave nao esta no mapa --> a insira associando-a a um valor (Gerado com o construtor padrao de V)
+	typename MyMap<K,V>::iterator IT = find(key);
+	if(IT==end()) {
+		IT = insert(make_pair(key,V())).first; //se chave nao esta no mapa --> a insira associando-a a um valor (Gerado com o construtor padrao de V)
 	}
-	return (*it).second; //retorna uma referencia para o valor associado a chave
+	return (*IT).second; //retorna uma referencia para o valor associado a chave
 }
 
 
