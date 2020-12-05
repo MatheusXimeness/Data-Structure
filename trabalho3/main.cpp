@@ -6,7 +6,7 @@
 using namespace std;
 
 int main(){
-
+        
         MyMap<string,int> map;
         string str;
         int tam = 0;
