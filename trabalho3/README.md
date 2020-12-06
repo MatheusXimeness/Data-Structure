@@ -9,8 +9,10 @@
 <br>
 <t>
 <ol>
+    <t>Material de aula</t>
     <t>Cadeia de Markov: https://www.youtube.com/watch?v=NKESrlCLBF0&ab_channel=Estat%C3%ADsticaparaConcurso</t><br>
     <t>Map: https://www.youtube.com/watch?v=-v1et3Cs7xY&ab_channel=CFBCursos</t><br>
-    <t>Getline: https://www.cplusplus.com/reference/string/string/getline/?kw=getline</t>
-</o>
+    <t>Getline: https://www.cplusplus.com/reference/string/string/getline/?kw=getline</t><br>
+
+</ol>
 </t>
