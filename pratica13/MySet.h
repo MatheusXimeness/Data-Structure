@@ -2,6 +2,7 @@
 #define MY_SET_LIST_H
 
 #include <algorithm> //classe pair esta aqui...
+#include <iostream>
 using namespace std;
 
 template<class T>
@@ -86,6 +87,23 @@ template<class T>
 MySetIterator<T>  MySetIterator<T>::operator++() {
 	//termine a implementacao desta funcao...
 	//(faca isso sem olhar a implementacao do PVANET...)
+
+	if( ptr->right ){
+		ptr = ptr->right;
+		while( ptr->left ) ptr = ptr->left;
+	}
+	else if( ptr->parent ){
+		if(ptr->parent->elem > ptr->elem) ptr = ptr->parent;
+		else{
+			ptr = ptr->parent;
+			while( ptr->parent && ptr->elem > ptr->parent->elem) ptr = ptr->parent;
+
+			ptr = ptr->parent;
+		}
+	} 
+
+	return *this;
+
 }
 
 //operador de pre-decremento
