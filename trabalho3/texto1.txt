@@ -1,0 +1,11 @@
+COMECO_TREINO
+Oi como voce estA.
+voCe vai viajar.
+Voce Vai Tambem.
+coMo voce vai.
+FINAL_TREINO
+consultar 5 voce
+consultar 5 voce vai
+consultar 5 voce vai Tambem
+gerar 5 padrao oi voce
+gerar 5 padrao oi voce
